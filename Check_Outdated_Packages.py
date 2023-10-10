@@ -219,8 +219,11 @@ def updated_pkgs(modules=None):
                                   for package in outdated_packages]
 
             # Step 3: Upgrade packages
-            for package in packages_to_update:
+            package_count = len(packages_to_update)
+            for i, package in enumerate(packages_to_update, 1):
+                print(f'Package {i}/{package_count}:')
                 subprocess.run(['pip', 'install', '--upgrade', package])
+                print()
 
             print("\nUpdating all packages complete!\n")
 

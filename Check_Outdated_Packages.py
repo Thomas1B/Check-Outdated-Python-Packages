@@ -169,11 +169,11 @@ def check_outdated_pkgs():
 
             # asking user to update all packages
             user = input("Would you like to update all of them? (y/n): ")
-            if user.lower() == ['y', 'yes']:
+            if user.lower() in ['y', 'yes']:
                 updated_pkgs()
             else:  # asking user if they want to update any packages.
                 user = input("Would you like to update any package? (y/n): ")
-                if user.lower() == ['y', 'yes']:
+                if user.lower() in ['y', 'yes']:
                     specific_modules = input(
                         "Enter the packages you want to update (separated by commas): "
                     )

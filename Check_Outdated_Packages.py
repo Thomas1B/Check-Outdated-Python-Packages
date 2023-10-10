@@ -228,7 +228,31 @@ def updated_pkgs(modules=None):
         print(f"Error: Failed to update modules.")
 
 
+def main():
+    '''
+    Main Program function
+    '''
+
+    check_pip_update()
+    check_outdated_pkgs()
+    show_installed_pkgs()
+
+    # Not used yet
+    # user = input("\nDo you want to uninstall any packages? (y/n): ")
+    # if user.lower() == 'y':
+    #     user = input("Uninstall all packages?: (y/n): ")
+    #     if user.lower() == 'y':
+    #         print("Uninstalling all packages... testing")
+    #         # save_module_names_to_file("Python_Packages_List.txt")
+    #     else:
+    #         modules = input("Enter the packages you want to uninstall (separated by commas): ")
+    #         if modules:
+    #             uninstall_module(modules)
+    #         else: print("Skipped!\n")
+    # else: print('Skipped.\n')
+
 # ******* not used yet *******
+
 
 def save_module_names():
     '''
@@ -288,30 +312,6 @@ def uninstall_all_pkgs():
             print(f"Successfully uninstalled {module}.")
         except subprocess.CalledProcessError:
             print(f"Failed to uninstall {module}.")
-
-
-def main():
-    '''
-    Main Program function
-    '''
-
-    check_pip_update()
-    check_outdated_pkgs()
-    show_installed_pkgs()
-
-    # Not used yet
-    # user = input("\nDo you want to uninstall any packages? (y/n): ")
-    # if user.lower() == 'y':
-    #     user = input("Uninstall all packages?: (y/n): ")
-    #     if user.lower() == 'y':
-    #         print("Uninstalling all packages... testing")
-    #         # save_module_names_to_file("Python_Packages_List.txt")
-    #     else:
-    #         modules = input("Enter the packages you want to uninstall (separated by commas): ")
-    #         if modules:
-    #             uninstall_module(modules)
-    #         else: print("Skipped!\n")
-    # else: print('Skipped.\n')
 
 
 if __name__ == '__main__':

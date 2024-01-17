@@ -7,6 +7,7 @@ This program was mostly written using ChatGPT, as I wanted to see what it was ca
 
 import os
 import subprocess
+import sys
 
 
 def check_pip_update():
@@ -39,7 +40,7 @@ def check_pip_update():
             if user.lower() in ['y', 'yes']:
                 # updating pip
                 subprocess.run(
-                    ['pip', 'install', '--upgrade', 'pip']
+                    [sys.executable, '-m', 'pip', 'install', '--upgrade', 'pip']
                 )
             else:
                 print("pip update skipped.")
@@ -231,32 +232,6 @@ def updated_pkgs(modules=None):
         print(f"Error: Failed to update modules.")
 
 
-def main():
-    '''
-    Main Program function
-    '''
-
-    check_pip_update()
-    check_outdated_pkgs()
-    show_installed_pkgs()
-
-    # Not used yet
-    # user = input("\nDo you want to uninstall any packages? (y/n): ")
-    # if user.lower() == 'y':
-    #     user = input("Uninstall all packages?: (y/n): ")
-    #     if user.lower() == 'y':
-    #         print("Uninstalling all packages... testing")
-    #         # save_module_names_to_file("Python_Packages_List.txt")
-    #     else:
-    #         modules = input("Enter the packages you want to uninstall (separated by commas): ")
-    #         if modules:
-    #             uninstall_module(modules)
-    #         else: print("Skipped!\n")
-    # else: print('Skipped.\n')
-
-# ******* not used yet *******
-
-
 def save_module_names():
     '''
     Function to save installed modules to a .txt file for reference.
@@ -318,4 +293,10 @@ def uninstall_all_pkgs():
 
 
 if __name__ == '__main__':
-    main()
+    '''
+    Main Program function
+    '''
+
+    check_pip_update()
+    check_outdated_pkgs()
+    show_installed_pkgs()

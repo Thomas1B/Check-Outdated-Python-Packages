@@ -3,6 +3,7 @@ Python program to check if pip is outdated, as well as all installed python pack
 If pip or any modules are outdated, programs asks user if they would like to update them.
 
 This program was mostly written using ChatGPT, as I wanted to see what it was capable of.
+
 '''
 
 import os
@@ -10,18 +11,25 @@ import subprocess
 import sys
 
 
-def check_pip_update():
+def check_pip_update(auto=False):
     '''
     Function to check if 'pip' is up to date.
 
         If pip is outdated, updated is automaticaly installed.
 
         Parameters:
-            None
+            auto: update without asking user, (default False).
 
         Returns:
             None
     '''
+
+    # local function
+    def update_pip():
+        subprocess.run(
+            [sys.executable, '-m', 'pip',
+             'install', '--upgrade', 'pip']
+        )
 
     print("\nChecking if pip is outdated...")
 
@@ -34,18 +42,21 @@ def check_pip_update():
         )
 
         if "pip" in outdated_check.stdout.lower():
-            print("The pip package is outdated.")
-            user_text = 'Would you like to update pip? (y/n): '
+            print("The pip package is outdated.", end=' ')
+
+            if auto:
+                print('Auto updating')
+                update_pip()
+                return
+
+            user_text = 'Would you like to update it? (y/n): '
             user = input(user_text)
             if user.lower() in ['y', 'yes']:
-                # updating pip
-                subprocess.run(
-                    [sys.executable, '-m', 'pip', 'install', '--upgrade', 'pip']
-                )
+                update_pip()
             else:
                 print("pip update skipped.")
         else:
-            print("Your pip package is up to date!")
+            print("pip package is up to date")
 
     except subprocess.CalledProcessError:
         exit("pip is not installed on your system!.\n")
@@ -146,9 +157,15 @@ def show_installed_pkgs():
         print("Skipped.\n")
 
 
-def check_outdated_pkgs():
+def check_outdated_pkgs(auto=False) -> None:
     '''
     Function to show outdated modules.
+
+    Parameters:
+        auto: update without asking user.
+
+    Returns:
+        None
     '''
 
     outdated_modules = []
@@ -166,7 +183,12 @@ def check_outdated_pkgs():
             # print list of modules
             for i, module in enumerate(outdated_modules):
                 print('{:>3} - {:s}'.format(i+1, module))
-            print(f"\nThere are {len(outdated_modules)} packages outdated.\n")
+            print(f"\nThere are {len(outdated_modules)} packages outdated.")
+
+            if auto:
+                print('Auto updating')
+                updated_pkgs()
+                return
 
             # asking user to update all packages
             user = input("Would you like to update all of them? (y/n): ")
@@ -189,8 +211,6 @@ def check_outdated_pkgs():
     except subprocess.CalledProcessError:
         print("Error: Failed to check for outdated modules.")
         exit('Pip may not be installed on your system.\n')
-
-    return outdated_modules
 
 
 def updated_pkgs(modules=None):
@@ -297,6 +317,14 @@ if __name__ == '__main__':
     Main Program function
     '''
 
-    check_pip_update()
-    check_outdated_pkgs()
-    show_installed_pkgs()
+    auto = False
+
+    if len(sys.argv) > 1:
+        if sys.argv[1] == 'auto':
+            auto = True
+
+    check_pip_update(auto)
+    check_outdated_pkgs(auto)
+
+    if auto is False:
+        show_installed_pkgs()

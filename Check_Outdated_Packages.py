@@ -252,66 +252,6 @@ def updated_pkgs(modules=None):
         print(f"Error: Failed to update modules.")
 
 
-def save_module_names():
-    '''
-    Function to save installed modules to a .txt file for reference.
-    '''
-
-    downloads_path = os.path.expanduser("~" + os.sep + "Downloads")
-    filename = f'{downloads_path}/Python Modules.txt'
-
-    # modules = [dist.key for dist in pkg_resources.working_set]
-
-    # Run 'pip list' command to get a list of installed packages
-    result = subprocess.run(['pip', 'list'], stdout=subprocess.PIPE, text=True)
-
-    # Split the output into lines and skip the header
-    lines = result.stdout.strip().split('\n')[2:]
-
-    # Extract package names and versions
-    modules = [line.split()[0] for line in lines]
-
-    with open(filename, 'w') as f:
-        f.write('Python Packages:\n')
-        for i, module in enumerate(modules):
-            f.write('{:>3}, {:s}\n'.format(i+1, module))
-    print(
-        f'Module names saved to "{filename.split("/")[-1]}" in your downloads.')
-
-
-def uninstall_module(modules):
-    '''
-    Function to uninstall a module
-
-    Parameter:
-        modules - str: name of module 
-    '''
-    for module in modules:
-        try:
-            subprocess.check_call(['pip', 'uninstall', '-y', module])
-            print(f"Successfully uninstalled {module}.")
-        except subprocess.CalledProcessError:
-            print(f"Failed to uninstall {module}.")
-
-
-def uninstall_all_pkgs():
-    '''
-    Function to uninstall all modules.
-
-     calls save_module_name for future reference.
-    '''
-
-    modules = get_installed_pkgs()
-
-    save_module_names()
-    for module in modules:
-        try:
-            subprocess.check_call(['pip', 'uninstall', '-y', module])
-            print(f"Successfully uninstalled {module}.")
-        except subprocess.CalledProcessError:
-            print(f"Failed to uninstall {module}.")
-
-
 if __name__ == '__main__':
     '''
     Main Program function

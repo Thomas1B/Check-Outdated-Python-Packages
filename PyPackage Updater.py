@@ -243,16 +243,16 @@ def show_updated_pkgs() -> None:
     Function to show updated packages.
     '''
 
-    if len(UPDATED) > 0:
-        user = input('Show updated packages? (y/n): ')
+    user = input('Show updated packages? (y/n): ')
+    if user.lower() in ['y', 'yes']:
+        if len(UPDATED) > 0:
 
-        if user.lower() in ['y', 'yes']:
             length = len(UPDATED)
             for i, package in enumerate(UPDATED, 1):
                 print(f'{i:>3}/{length}: {package}')
 
-    else:
-        print("-> No packages have been updated.")
+        else:
+            print("-> No packages have been updated.")
 
 
 if __name__ == '__main__':

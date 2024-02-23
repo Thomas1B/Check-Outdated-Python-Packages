@@ -1,0 +1,16 @@
+PyPackage Updater.spec
+build/PyPackage Updater/Analysis-00.toc
+build/PyPackage Updater/base_library.zip
+build/PyPackage Updater/EXE-00.toc
+build/PyPackage Updater/generated-fffa66cd05e6444b29e2cbb5a24cb95a220d7e4252a03817526c5bc011f6b024.ico
+build/PyPackage Updater/PKG-00.toc
+build/PyPackage Updater/PyPackage Updater.pkg
+build/PyPackage Updater/PYZ-00.pyz
+build/PyPackage Updater/PYZ-00.toc
+build/PyPackage Updater/warn-PyPackage Updater.txt
+build/PyPackage Updater/xref-PyPackage Updater.html
+build/PyPackage Updater/localpycs/pyimod01_archive.pyc
+build/PyPackage Updater/localpycs/pyimod02_importers.pyc
+build/PyPackage Updater/localpycs/pyimod03_ctypes.pyc
+build/PyPackage Updater/localpycs/pyimod04_pywin32.pyc
+build/PyPackage Updater/localpycs/struct.pyc

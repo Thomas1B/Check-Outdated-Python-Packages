@@ -15,6 +15,12 @@ import sys
 UPDATED = []
 
 
+def update_pip():
+    global UPDATED
+    UPDATED.append('pip')
+    subprocess.run(['python.exe', '-m', 'pip', 'install', '--upgrade', 'pip'])
+
+
 def check_pip_update(auto=False):
     '''
     Function to check if 'pip' is up to date.
@@ -29,13 +35,6 @@ def check_pip_update(auto=False):
     '''
 
     # local function
-    def update_pip():
-        global UPDATED
-        UPDATED.append('pip')
-        subprocess.run(
-            [sys.executable, '-m', 'pip',
-             'install', '--upgrade', 'pip']
-        )
 
     print("\nChecking if pip is outdated...")
 
@@ -282,5 +281,5 @@ if __name__ == '__main__':
                 print("Program Terminated.\n")
                 break
 
-    except KeyboardInterrupt:
-        print("Program Terminated.")
+    except Exception as err:
+        print(err)

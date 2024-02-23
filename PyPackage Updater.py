@@ -4,6 +4,7 @@ If pip or any modules are outdated, programs asks user if they would like to upd
 
 This program was mostly written using ChatGPT, as I wanted to see what it was capable of.
 
+to run auto update `python filename.py auto`
 '''
 
 import os

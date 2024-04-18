@@ -131,7 +131,7 @@ def show_installed_pkgs():
         print(text)
 
 
-def get_outdated_pkgs() -> list:
+def get_outdated_pkgs() -> list[str]:
     '''
     Function to get a list of outdated packages.
     '''
@@ -141,6 +141,7 @@ def get_outdated_pkgs() -> list:
         ['pip', 'list', '--outdated'])
     outdated_modules = outdated_modules.decode().strip().split('\n')[2:]
     outdated_modules = [module.split()[0] for module in outdated_modules]
+    return outdated_modules
 
 
 def check_outdated_pkgs(auto=False) -> None:

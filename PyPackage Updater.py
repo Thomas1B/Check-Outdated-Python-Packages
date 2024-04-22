@@ -277,10 +277,15 @@ if __name__ == '__main__':
             show_updated_pkgs()
 
         while True:
+            if auto:
+                break  # quit
+
             user = input("\nEnter 'q' to quit program: ")
             if user.lower() in ['q', 'quit']:
-                print("Program Terminated.\n")
-                break
+                break  # quit
+
+        print("Program has ended.\n")
 
     except Exception as err:
+        print('\n ERROR: \n')
         print(err)
